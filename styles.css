@@ -1,0 +1,182 @@
+/* ── Gradient heading ── */
+.gradient-heading {
+  background: linear-gradient(135deg, #f8fafc 0%, #c7d2fe 35%, #a5b4fc 55%, #818cf8 75%, #c4b5fd 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 30px rgba(129, 140, 248, 0.25));
+}
+
+/* ── Glass card ── */
+.glass-card {
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 0 1px rgba(99, 102, 241, 0.06) inset,
+    0 4px 24px rgba(0, 0, 0, 0.35),
+    0 0 48px rgba(99, 102, 241, 0.12),
+    0 0 80px rgba(139, 92, 246, 0.06);
+}
+
+/* ── Generate button ── */
+.generate-btn {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #7c3aed 100%);
+  box-shadow:
+    0 4px 20px rgba(99, 102, 241, 0.45),
+    0 0 40px rgba(139, 92, 246, 0.2);
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+.generate-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.15) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.generate-btn:hover:not(:disabled)::before {
+  transform: translateX(100%);
+}
+
+.generate-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow:
+    0 6px 28px rgba(99, 102, 241, 0.55),
+    0 0 56px rgba(139, 92, 246, 0.35);
+}
+
+.generate-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* ── Preview wrapper ── */
+.preview-wrapper {
+  border: 2px dashed rgba(148, 163, 184, 0.25);
+  background: rgba(0, 0, 0, 0.2);
+  transition: border-color 0.3s ease;
+}
+
+.preview-wrapper.is-loading {
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+.preview-wrapper.has-image {
+  border-style: solid;
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+/* ── Spinner ── */
+.spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid rgba(148, 163, 184, 0.2);
+  border-top-color: #818cf8;
+  border-right-color: #a78bfa;
+  border-radius: 50%;
+  animation: spin 0.85s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Skeleton shimmer bar ── */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(148, 163, 184, 0.1) 0%,
+    rgba(129, 140, 248, 0.35) 50%,
+    rgba(148, 163, 184, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+/* ── Aspect ratio cards ── */
+.ratio-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+  padding: 0.75rem 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: #94a3b8;
+  transition: all 0.2s ease;
+}
+
+.ratio-option:hover .ratio-card {
+  border-color: rgba(129, 140, 248, 0.3);
+  background: rgba(99, 102, 241, 0.08);
+  color: #c7d2fe;
+}
+
+.ratio-card--active,
+.peer:checked ~ .ratio-card {
+  border-color: rgba(129, 140, 248, 0.5);
+  background: rgba(99, 102, 241, 0.15);
+  color: #e0e7ff;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+}
+
+/* ── Custom toggle ── */
+.toggle-track {
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 24px;
+  border-radius: 9999px;
+  background: rgba(51, 65, 85, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #94a3b8;
+  transition: transform 0.25s ease, background 0.25s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-input:checked + .toggle-track {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  box-shadow: 0 0 16px rgba(99, 102, 241, 0.4);
+}
+
+.toggle-input:checked + .toggle-track .toggle-thumb {
+  transform: translateX(20px);
+  background: #fff;
+}
+
+.toggle-input:focus-visible + .toggle-track {
+  outline: 2px solid rgba(129, 140, 248, 0.6);
+  outline-offset: 2px;
+}
+
+/* ── Accordion panel (grid trick for smooth height) ── */
+.accordion-panel {
+  grid-template-rows: 0fr;
+}
+
+.accordion-panel.is-open {
+  grid-template-rows: 1fr;
+}
+
+#accordion-toggle[aria-expanded='true'] #accordion-chevron {
+  transform: rotate(180deg);
+}
+
+/* ── Image visible state ── */
+#result-image.is-visible {
+  opacity: 1;
+}
